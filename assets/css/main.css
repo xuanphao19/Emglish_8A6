@@ -36,9 +36,24 @@ html {
 
 .App .sub-heading {
   margin-top: 5px;
-  font-size: 1.6rem;
+  font-size: 2rem;
   font-weight: 400;
   color: rgb(0, 26, 255);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 30px;
+  border-radius: 5px;
+  background: #ffa17f;
+  background: -webkit-linear-gradient(to right, #00223e, #ffa17f);
+  background: linear-gradient(to right, #5180a785, #ffa17f61);
+}
+#thoi_gian div {
+  position: relative;
+  margin: 0 6px;
+}
+#thoi_gian div span {
+  margin: 0 3px;
 }
 
 .flip-card-inner {
@@ -152,13 +167,38 @@ html {
   border-color: #1dbfaf9a;
 }
 
-.App-control .audioQuestion {
+.App-control .audioItem {
   position: absolute;
   right: -64px;
   top: 0;
   width: 116px;
   height: 38px;
+  z-index: -1;
+}
+
+.audioQuestions {
+  position: absolute;
+  right: 0px;
+  top: 25px;
+  width: 45px;
+  height: 36px;
+  border-radius: 999px;
+  background-color: #e7f6c2d9;
+  border: 0.5px solid #8896682b;
+  box-shadow: 0px 0 1px #ffffff;
   z-index: 999;
+  display: none;
+}
+.speakerWave {
+  width: 34px;
+  height: 28px;
+  fill: #99d409;
+  margin-top: 3px;
+}
+.speakerWave:hover {
+  fill: #99d409;
+  cursor: pointer;
+  transform: scale(1.1);
 }
 
 .unInvalid {
