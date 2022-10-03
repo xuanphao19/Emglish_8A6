@@ -116,33 +116,32 @@ var vocabularyEnglish = [
   ['Vietnamese people are very hospitable', 'Viết lại vd(123) với từ: Hospitable', 'Gợi ý', 'Vietnamese people are very hospitable'],
   [
     'Livestock include farm animals such as buffalo, cow, goat or sheep',
-    'Viết lại nội dung vừa nghe:<audio class="audioQuestion" controls><source src="https://www.tienganh123.com/file/phothong/lop8-moi/unit2/lesson2/vocab/audio/3-1.mp3"></audio>',
+    'Viết lại nội dung vừa nghe:<audio class="audioItem" controls><source src="https://www.tienganh123.com/file/phothong/lop8-moi/unit2/lesson2/vocab/audio/3-1.mp3"></audio>',
     'Gợi ý',
     'Livestock include farm animals such as buffalo, cow, goat or sheep',
   ],
   [
     'Paddy field',
-    'Viết lại nội dung vừa nghe:<audio class="audioQuestion" controls><source src="https://www.tienganh123.com/file/phothong/lop8-moi/unit2/lesson1/vocab/audio/1.mp3"></audio>',
+    'Viết lại nội dung vừa nghe:<audio class="audioItem" controls><source src="https://www.tienganh123.com/file/phothong/lop8-moi/unit2/lesson1/vocab/audio/1.mp3"></audio>',
   ],
   [
     'Harvest time',
-    'Viết lại nội dung vừa nghe:<audio class="audioQuestion" controls><source src="https://www.tienganh123.com/file/phothong/lop8-moi/unit2/lesson1/vocab/audio/4.mp3"></audio>',
+    'Viết lại nội dung vừa nghe:<audio class="audioItem" controls><source src="https://www.tienganh123.com/file/phothong/lop8-moi/unit2/lesson1/vocab/audio/4.mp3"></audio>',
   ],
   [
     'Go herding the buffaloes',
-    'Viết lại nội dung vừa nghe:<audio class="audioQuestion" controls><source src="https://www.tienganh123.com/file/phothong/lop8-moi/unit2/lesson1/vocab/audio/11.mp3"></audio>',
+    'Viết lại nội dung vừa nghe:<audio class="audioItem" controls><source src="https://www.tienganh123.com/file/phothong/lop8-moi/unit2/lesson1/vocab/audio/11.mp3"></audio>',
     'Gợi ý',
     'Go herding the buffaloes',
   ],
   [
     'Herd the buffaloes',
-    'Viết lại nội dung vừa nghe:<audio class="audioQuestion" controls><source src="https://www.tienganh123.com/file/phothong/lop8-moi/unit2/lesson1/vocab/audio/10.mp3"></audio>',
+    'Viết lại nội dung vừa nghe:<audio class="audioItem" controls><source src="https://www.tienganh123.com/file/phothong/lop8-moi/unit2/lesson1/vocab/audio/10.mp3"></audio>',
     'Gợi ý',
     'Herd the buffaloes',
   ],
   // ['0', '1', '2', '3', '4', '5', '6'],
 ];
-
 var songs = [
   'Lười học thì chóng làm quan',
   'Luyện mãi thành tài, miệt mài tất giỏi',
@@ -165,8 +164,6 @@ var randomNumbers = [];
 var n = 0;
 var i = 0;
 var randomTerm;
-var audioElement = document.querySelector('#audios');
-audioElement.src = '';
 
 // Tìm số (n) ngẫu nhiên theo index trong phạm vi max được truyền vào
 function randomNumber(max) {
@@ -198,23 +195,31 @@ function getRandomQuestion() {
   randomNumber(lengths);
   randomTerm = vocabularyEnglish[n];
   questionFrontId.innerHTML = `${randomTerm[1]}`;
+  speakerWaves();
   lengthArr.innerHTML = `Nhập lại bằng English    ${i} / ${lengths}`;
   i += 1;
   // Xử lý nếu có ảnh thì hiển thị ra giao diện khi hàm được gọi.
   if (randomTerm[4]) {
     flipCardFrontEle.innerHTML = `${randomTerm[4]}`;
   }
-  console.log(`Gợi ý dành cho bạn: `, randomTerm);
+  console.log(`Gợi ý dành cho bạn: `, randomTerm[0]);
   return randomTerm;
 }
 
-//  Ngẫu nhiên in ra cấu chửi bới (Hát):
-function getRandomSong() {
-  var songLength = songs.length;
-  randomNumber(songLength);
-  let newRandomSong;
-  newRandomSong = songs[n];
-  formMessage.innerHTML = `${newRandomSong}`;
+function speakerWaves() {
+  var speakerWaveEle = document.querySelector('.speakerWave');
+  var audioItemElement = appElement.querySelector('.audioItem');
+  if (audioItemElement) {
+    var audioQuestionElement = appElement.querySelector('.audioQuestions');
+    audioQuestionElement.style.display = 'block';
+    speakerWaveEle.addEventListener('click', () => {
+      audioItemElement.style.transform = 'scale(0.3)';
+      if (isPlayIng) {
+        pauseBackgroundMusic();
+      }
+      audioItemElement.play();
+    });
+  }
 }
 
 // Xử lý khi Click vào Btn Next
@@ -235,13 +240,15 @@ cardNext.addEventListener('click', function () {
       if (answerElement.value === randomTerm[0]) {
         formMessage.innerHTML = '';
         submitResult.innerHTML = '';
-        playMusicYeah();
+        var audioYeahList = audioLists[2];
+        audioPlay(audioYeahList);
         card.classList.remove('is-flipped');
         getRandomQuestion();
         return undefined;
       } else {
         answerElement.classList.add('invalid');
-        playErrorMusic();
+        var audioErrorList = audioLists[0];
+        audioPlay(audioErrorList);
         getRandomSong();
       }
     }
@@ -262,7 +269,7 @@ cardNext.addEventListener('click', function () {
 
   if (i === minRequirements) {
     submitResult.classList.add('correctResults');
-    submitCl.innerHTML = `Nộp Bài Dừng Nghỉ Ngơi!`;
+    submitCl.innerText = `Nộp Bài Dừng Nghỉ Ngơi!`;
     submitResult.innerHTML = `Chúc mừng bạn!<br> Bạn đã vượt qua thử thách. <br> Bạn vẫn có thể tiếp tục luyện tập <br> Nếu bạn muốn nâng cao Trình độ!`;
 
     /* Object.assign để hợp nhất Object tạo Css inline nhưng phức tạp */
@@ -277,6 +284,16 @@ cardNext.addEventListener('click', function () {
   }
 });
 
+//  Ngẫu nhiên in ra cấu chửi bới (Hát):
+function getRandomSong() {
+  var songLength = songs.length;
+  randomNumber(songLength);
+  let newRandomSong;
+  newRandomSong = songs[n];
+  formMessage.innerHTML = `${newRandomSong}`;
+}
+
+// Xử lý nút gợi ý:
 suggestions.addEventListener('click', function () {
   submitResult.innerHTML = '';
   formMessage.innerHTML = '';
@@ -294,6 +311,8 @@ suggestions.addEventListener('click', function () {
   if (answerElement.value === '') {
     answerElement.classList.add('invalid');
     suggestionsMsg.innerHTML = `<div id='sum10'>Lười học là "Bệnh cần chống như chống giặc!"</div>`;
+    var audioSuggestionList = audioLists[5];
+    audioPlay(audioSuggestionList);
     return;
   } else {
     answerElement.classList.add('invalid');
@@ -314,7 +333,8 @@ submit.addEventListener('click', function () {
       submitResult.classList.add('correctResult');
       answerElement.classList.remove('invalid');
       submitResult.innerHTML = `Chúc mừng bạn đã vượt qua thử thách! <br> Kết quả của bạn đã được gửi tới hòm thư: nguyenthanhhoa075@gmail.com.`;
-      playGoodBeyMusic();
+      var audioGoodBeyList = audioLists[3];
+      audioPlay(audioGoodBeyList);
     }
     return;
   }
@@ -336,10 +356,6 @@ answerElement.addEventListener('focus', function handleClearError(e) {
   submitResult.classList.remove('correctResult');
   submitResult.classList.remove('correctResults');
   e.target.value = '';
-});
-
-answerElement.addEventListener('blur', function handle() {
-  pauseBackgroundMusic();
 });
 
 // Chặn hành vi mặc định của Keydown và gán cho keydown Enter bằng Click
@@ -373,31 +389,41 @@ answerElement.oninput = function () {
 };
 
 //  Các hàm xử lý Audio:
-var audioLists = ['assets/audio/Am_Ohno', 'assets/audio/Uoc_mo_cua_Me', 'assets/audio/yeah', 'assets/audio/Tambiet', 'assets/audio/Nhac_nen_hay'];
-var backgroundMusic;
-isPlayIng = false;
-function playErrorMusic() {
-  var errorMusic = audioElement;
-  audioElement.src = `./${audioLists[0]}.mp3`;
-  errorMusic.play();
+var audioLists = ['Am_Ohno', 'Uoc_mo_cua_Me', 'yeah', 'Tambiet', 'Nhac_nen_hay', 'Tieng_bom'];
+var audioElement = document.querySelector('#audios');
+function audioPlay(audioList) {
+  audioElement.src = `./assets/audio/${audioList}.mp3`;
+  audioElement.play();
 }
 
+var backgroundMusic;
+var isPlayIng = false;
 function playBackgroundMusic() {
-  backgroundMusic = audioElement;
-  audioElement.src = `./${audioLists[1]}.mp3`;
+  backgroundMusic = appElement.querySelector('#backgroundMusic');
+  isPlayIng = true;
   backgroundMusic.play();
 }
 function pauseBackgroundMusic() {
+  isPlayIng = false;
   backgroundMusic.pause();
 }
-
-function playGoodBeyMusic() {
-  var beyMusic = audioElement;
-  audioElement.src = `./${audioLists[3]}.mp3`;
-  beyMusic.play();
+function Dong_ho() {
+  var gio = document.getElementById('gio');
+  var phut = document.getElementById('phut');
+  var giay = document.getElementById('giay');
+  var Gio_hien_tai = new Date().getHours();
+  var Phut_hien_tai = new Date().getMinutes();
+  var Giay_hien_tai = new Date().getSeconds();
+  gio.innerHTML = Gio_hien_tai;
+  if (Phut_hien_tai < 10) {
+    phut.innerHTML = `0${Phut_hien_tai}`;
+  } else {
+    phut.innerHTML = Phut_hien_tai;
+  }
+  if (Giay_hien_tai < 10) {
+    giay.innerHTML = `0${Giay_hien_tai}`;
+  } else {
+    giay.innerHTML = Giay_hien_tai;
+  }
 }
-
-function playMusicYeah() {
-  var yeahMusicElement = appElement.querySelector('#yeahMusic');
-  yeahMusicElement.play();
-}
+var Dem_gio = setInterval(Dong_ho, 1000);
