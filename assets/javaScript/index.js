@@ -389,7 +389,7 @@ answerElement.oninput = function () {
 };
 
 //  Các hàm xử lý Audio:
-var audioLists = ['Am_Ohno', 'Uoc_mo_cua_Me', 'yeah', 'Tambiet', 'Nhac_nen_hay', 'Tieng_bom'];
+var audioLists = ['Am_Ohno', 'Uoc_mo_cua_Me', 'yeah', 'Tambiet', 'Nhac_nen_hay', 'Tieng_bom', 'Tiengkimgiay'];
 var audioElement = document.querySelector('#audios');
 function audioPlay(audioList) {
   audioElement.src = `./assets/audio/${audioList}.mp3`;
@@ -425,5 +425,7 @@ function Dong_ho() {
   } else {
     giay.innerHTML = Giay_hien_tai;
   }
+  // var audioClockList = audioLists[6];
+  // audioPlay(audioClockList);
 }
 var Dem_gio = setInterval(Dong_ho, 1000);
