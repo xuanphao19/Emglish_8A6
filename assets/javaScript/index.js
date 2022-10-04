@@ -414,18 +414,29 @@ function Dong_ho() {
   var Gio_hien_tai = new Date().getHours();
   var Phut_hien_tai = new Date().getMinutes();
   var Giay_hien_tai = new Date().getSeconds();
+
   gio.innerHTML = Gio_hien_tai;
   if (Phut_hien_tai < 10) {
-    phut.innerHTML = `0${Phut_hien_tai}`;
+    phut.innerHTML = ` : 0${Phut_hien_tai}`;
   } else {
-    phut.innerHTML = Phut_hien_tai;
+    phut.innerHTML = ` : ${Phut_hien_tai}`;
   }
   if (Giay_hien_tai < 10) {
-    giay.innerHTML = `0${Giay_hien_tai}`;
+    giay.innerHTML = ` : 0${Giay_hien_tai}`;
   } else {
-    giay.innerHTML = Giay_hien_tai;
+    giay.innerHTML = ` : ${Giay_hien_tai}`;
   }
   // var audioClockList = audioLists[6];
   // audioPlay(audioClockList);
 }
 var Dem_gio = setInterval(Dong_ho, 1000);
+
+var dates = new Date();
+var date = dates.getDate();
+var current_date;
+if (date < 10) {
+  current_date = `Ngày 0${dates.getDate()} / ${dates.getMonth() + 1} / ${dates.getFullYear()}`;
+} else {
+  current_date = `${dates.getDate()} / ${dates.getMonth() + 1} / ${dates.getFullYear()}`;
+}
+document.querySelector('.shows_date').innerHTML = current_date;
