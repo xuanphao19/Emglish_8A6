@@ -26,23 +26,19 @@
         <div class="App-content">
           <div class="questionFront">
             <div class="App-group">
+
               <div class='shows_time'>
                 <div class="sub-heading" id="thoi_gian">
-                  <div>
-                    <span id="gio">00</span>
-                  </div>
-                  <div>
-                    <span id="phut">00</span>
-                  </div>
-                  <div>
-                    <span id="giay">00</span>
-                  </div>
+                  <div> <span id="gio">00</span></div>
+                  <div> <span id="phut">00</span> </div>
+                  <div> <span id="giay">00</span> </div>
                 </div>
                 <div class="shows_date"></div>
-
               </div>
+
               <span class="App-label"> Question: <span class='lengthArr'></span></span>
               <div class="App-control" id="questionFront"> </div>
+              <audio class="audioItem"></audio>'
               <div class='audioQuestions'><span><svg class='speakerWave' width='38' height='36'
                     xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="red"
                     className="w-6 h-6">
@@ -54,12 +50,21 @@
                 </span></div>
             </div>
 
-            <div class="App-group">
-              <label for="answer" class="App-label">Answer plan:</label>
+            <div class="App-group mgt-8">
+
+              <div class='answers App-label'>
+                <div for="answer" class="answer">Answer plan:</div>
+                <div class="timeSum">
+                  <span class="minutes">00</span> :
+                  <span class="seconds">00</span> .
+                  <span class="milliseconds">00</span>
+                </div>
+              </div>
               <input class="App-control" id="answer" name="answer"
                 placeholder="Nhập nội dung trả lời của bạn!" type="text" />
               <span class="App-message"></span>
               <span class="suggestions"></span>
+              <div class="coating"></div>
             </div>
 
             <div class="show-btn">
@@ -68,7 +73,11 @@
             </div>
             <div id="submitResult"></div>
             <button id="submit" class="btn">
-              <div class='submit'>Nộp bài</div>
+              <div class='submits'>
+                <div id='btnSubmits' class='submit'>Nộp bài</div>
+                <div id='btnPause' class='submit'>Pause</div>
+                <div id='btnStar' class='submit'>Star</div>
+              </div>
             </button>
           </div>
         </div>
@@ -81,6 +90,8 @@
     </div>
 
     <script src="./assets/javaScript/index.js"></script>
-
+    <script>
+      var watch = new Stopwatch(timeSum);
+    </script>
   </body>
 </html>
