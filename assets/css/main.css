@@ -132,8 +132,9 @@ html {
 .App-group {
   position: relative;
   display: flex;
-  margin-bottom: 12px;
   flex-direction: column;
+  justify-content: space-between;
+  margin-bottom: 12px;
 }
 
 .App-content {
@@ -171,6 +172,16 @@ html {
   user-select: none !important;
 }
 
+.questionFront {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+
+.mgt-8 {
+  margin-top: -8px;
+}
+
 #answer:hover {
   border-color: #1dbfaf9a;
 }
@@ -187,7 +198,7 @@ html {
 .audioQuestions {
   position: absolute;
   right: 0px;
-  bottom: 1px;
+  bottom: 12px;
   width: 45px;
   height: 38px;
   border-radius: 999px;
@@ -197,6 +208,7 @@ html {
   z-index: 999;
   display: none;
 }
+
 .speakerWave {
   width: 34px;
   height: 28px;
@@ -222,6 +234,31 @@ html {
   background-color: #fad5d5c2;
 }
 
+.answers {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.App-group .answers .answer {
+  padding: 0;
+  line-height: 1.6;
+}
+.timeSum {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 1.6rem;
+  padding-right: 16px;
+  line-height: 1.6;
+  font-weight: 540;
+  font-style: italic;
+  color: rgb(255, 0, 0);
+}
+
+.timeSum span {
+  padding: 0 10px;
+}
+
 #answer input {
   word-break: break-word;
 }
@@ -236,6 +273,7 @@ html {
   font-size: 1.6rem;
   font-style: italic;
   font-weight: 400;
+  line-height: 1.6;
 }
 
 #submitResult,
@@ -287,6 +325,24 @@ html {
   padding: 0;
 }
 
+.App-group.mgt-8 .coating {
+  position: absolute;
+  top: 30px;
+  left: 0;
+  display: block;
+  width: 300px;
+  height: 40px;
+  font-weight: 500;
+  line-height: 43px;
+  font-size: 1.8rem;
+  border-radius: 5px;
+  font-style: italic;
+  color: rgb(0, 26, 255);
+  background: rgb(67 244 152 / 76%);
+  opacity: 0;
+  z-index: 99;
+}
+
 .show-btn {
   margin-top: -6px;
   display: flex;
@@ -310,13 +366,24 @@ html {
 #submit {
   margin: 4px 0 6px 0;
   width: 296px;
+}
+#submit .submits {
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+  background-color: rgb(255, 255, 255);
+}
+
+.submit {
+  border-radius: 4px;
+  width: 32.7%;
   border: 2px solid rgb(67, 244, 152);
   background-image: linear-gradient(to top, rgb(67, 244, 152), rgb(172 252 211), rgb(67, 244, 152));
 }
 
 #suggestions:hover,
 #next:hover,
-#submit:hover {
+.submit:hover {
   transform: scale(1.03);
   opacity: 0.8;
 }
