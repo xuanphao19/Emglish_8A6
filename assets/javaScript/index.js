@@ -5,8 +5,11 @@ var answerElement = appElement.querySelector('#answer');
 var lengthArr = appElement.querySelector('.lengthArr');
 var flipCardFrontEle = appElement.querySelector('.flip-card-front');
 var cardNext = appElement.querySelector('#next');
-var submit = appElement.querySelector('#submit');
-var submitCl = appElement.querySelector('.submit');
+var coating = appElement.querySelector('.coating');
+var timeSum = appElement.querySelector('.timeSum');
+var btnStar = appElement.querySelector('#btnStar');
+var btnPause = appElement.querySelector('#btnPause');
+var btnSubmits = appElement.querySelector('#btnSubmits');
 var submitResult = appElement.querySelector('#submitResult');
 var questionFrontId = appElement.querySelector('#questionFront');
 var suggestions = appElement.querySelector('#suggestions');
@@ -116,30 +119,14 @@ var vocabularyEnglish = [
   ['Vietnamese people are very hospitable', 'Viết lại vd(123) với từ: Hospitable', 'Gợi ý', 'Vietnamese people are very hospitable'],
   [
     'Livestock include farm animals such as buffalo, cow, goat or sheep',
-    'Viết lại nội dung vừa nghe:<audio class="audioItem" controls><source src="https://www.tienganh123.com/file/phothong/lop8-moi/unit2/lesson2/vocab/audio/3-1.mp3"></audio>',
+    'https://www.tienganh123.com/file/phothong/lop8-moi/unit2/lesson2/vocab/audio/3-1.mp3',
     'Gợi ý',
     'Livestock include farm animals such as buffalo, cow, goat or sheep',
   ],
-  [
-    'Paddy field',
-    'Viết lại nội dung vừa nghe:<audio class="audioItem" controls><source src="https://www.tienganh123.com/file/phothong/lop8-moi/unit2/lesson1/vocab/audio/1.mp3"></audio>',
-  ],
-  [
-    'Harvest time',
-    'Viết lại nội dung vừa nghe:<audio class="audioItem" controls><source src="https://www.tienganh123.com/file/phothong/lop8-moi/unit2/lesson1/vocab/audio/4.mp3"></audio>',
-  ],
-  [
-    'Go herding the buffaloes',
-    'Viết lại nội dung vừa nghe:<audio class="audioItem" controls><source src="https://www.tienganh123.com/file/phothong/lop8-moi/unit2/lesson1/vocab/audio/11.mp3"></audio>',
-    'Gợi ý',
-    'Go herding the buffaloes',
-  ],
-  [
-    'Herd the buffaloes',
-    'Viết lại nội dung vừa nghe:<audio class="audioItem" controls><source src="https://www.tienganh123.com/file/phothong/lop8-moi/unit2/lesson1/vocab/audio/10.mp3"></audio>',
-    'Gợi ý',
-    'Herd the buffaloes',
-  ],
+  ['Paddy field', 'https://www.tienganh123.com/file/phothong/lop8-moi/unit2/lesson1/vocab/audio/1.mp3'],
+  ['Harvest time', 'https://www.tienganh123.com/file/phothong/lop8-moi/unit2/lesson1/vocab/audio/4.mp3'],
+  ['Go herding the buffaloes', 'https://www.tienganh123.com/file/phothong/lop8-moi/unit2/lesson1/vocab/audio/11.mp3', 'Gợi ý', 'Go herding the buffaloes'],
+  ['Herd the buffaloes', 'https://www.tienganh123.com/file/phothong/lop8-moi/unit2/lesson1/vocab/audio/10.mp3', 'Gợi ý', 'Herd the buffaloes'],
   // ['0', '1', '2', '3', '4', '5', '6'],
 ];
 var songs = [
@@ -159,16 +146,16 @@ var songs = [
 
 var lengths = vocabularyEnglish.length;
 var answerValue = answerElement.value;
-var minRequirements = 10;
+var minRequirements = 20;
 var randomNumbers = [];
 var n = 0;
 var i = 0;
+var j = 0;
 var randomTerm;
 
 // Tìm số (n) ngẫu nhiên theo index trong phạm vi max được truyền vào
 function randomNumber(max) {
   // Xét (n) không cho lặp lại mỗi khi gọi hàm:
-  var j = 0;
   j++;
   if (j === max - 1) {
     j = 0;
@@ -196,22 +183,32 @@ function getRandomQuestion() {
   randomTerm = vocabularyEnglish[n];
   questionFrontId.innerHTML = `${randomTerm[1]}`;
   speakerWaves();
-  lengthArr.innerHTML = `Nhập lại bằng English    ${i} / ${lengths}`;
-  i += 1;
+  lengthArr.innerHTML = `Nhập lại bằng English  ${i} / ${lengths}`;
+  i++;
   // Xử lý nếu có ảnh thì hiển thị ra giao diện khi hàm được gọi.
-  if (randomTerm[4]) {
-    flipCardFrontEle.innerHTML = `${randomTerm[4]}`;
+
+  for (var item of randomTerm) {
+    //  let result = intInputValue.includes(answerElement.value);
+    if (item.includes('png') || item.includes('jpg')) {
+      var itemImg = item;
+      flipCardFrontEle.innerHTML = `${itemImg}`;
+    }
+    if (item.includes('audio')) {
+      var itemMp3 = item;
+      questionFrontId.innerHTML = `Viết lại nội dung vừa nghe:`;
+      audioQuestionElement.style.display = 'block';
+      audioItemElement.src = `${itemMp3}`;
+    }
   }
   console.log(`Gợi ý dành cho bạn: `, randomTerm[0]);
   return randomTerm;
 }
 
+var audioQuestionElement = appElement.querySelector('.audioQuestions');
+var audioItemElement = appElement.querySelector('.audioItem');
 function speakerWaves() {
-  var speakerWaveEle = document.querySelector('.speakerWave');
-  var audioItemElement = appElement.querySelector('.audioItem');
   if (audioItemElement) {
-    var audioQuestionElement = appElement.querySelector('.audioQuestions');
-    audioQuestionElement.style.display = 'block';
+    var speakerWaveEle = document.querySelector('.speakerWave');
     speakerWaveEle.addEventListener('click', () => {
       audioItemElement.style.transform = 'scale(0.3)';
       if (isPlayIng) {
@@ -243,6 +240,7 @@ cardNext.addEventListener('click', function () {
         var audioYeahList = audioLists[2];
         audioPlay(audioYeahList);
         card.classList.remove('is-flipped');
+        audioQuestionElement.style.display = 'none';
         getRandomQuestion();
         return undefined;
       } else {
@@ -269,7 +267,6 @@ cardNext.addEventListener('click', function () {
 
   if (i === minRequirements) {
     submitResult.classList.add('correctResults');
-    submitCl.innerText = `Nộp Bài Dừng Nghỉ Ngơi!`;
     submitResult.innerHTML = `Chúc mừng bạn!<br> Bạn đã vượt qua thử thách. <br> Bạn vẫn có thể tiếp tục luyện tập <br> Nếu bạn muốn nâng cao Trình độ!`;
 
     /* Object.assign để hợp nhất Object tạo Css inline nhưng phức tạp */
@@ -280,7 +277,7 @@ cardNext.addEventListener('click', function () {
   }
   if (i === 10 + minRequirements) {
     submitResult.classList.add('correctResults');
-    submitResult.innerHTML = ` Bạn là người thật chăm chỉ đấy <br> "Có công mài sắt có ngày nên kim" <br> Chúc mừng bạn cán mốc 20 câu đúng!`;
+    submitResult.innerHTML = ` Bạn là người thật chăm chỉ đấy <br> "Có công mài sắt có ngày nên kim" <br> Chúc mừng bạn cán mốc ${minRequirements + 10} câu đúng!`;
   }
 });
 
@@ -308,46 +305,64 @@ suggestions.addEventListener('click', function () {
   // Kết hợp css Xử lý xoay ảnh:
   card.classList.toggle('is-flipped');
   // Xử lý hiển thị massage chỉ dẫn gợi ý:
+  var audioSuggestionList = audioLists[5];
   if (answerElement.value === '') {
     answerElement.classList.add('invalid');
     suggestionsMsg.innerHTML = `<div id='sum10'>Lười học là "Bệnh cần chống như chống giặc!"</div>`;
-    var audioSuggestionList = audioLists[5];
     audioPlay(audioSuggestionList);
     return;
   } else {
     answerElement.classList.add('invalid');
     suggestionsMsg.innerHTML = `<div id='sum10'>Click Next để kiểm tra kết quả của bạn!</div>`;
+    audioPlay(audioSuggestionList);
     return;
   }
 });
 
 // Hướng dẫn nộp bài
-submit.addEventListener('click', function () {
+btnSubmits.addEventListener('click', function () {
   formMessage.innerHTML = '';
   suggestionsMsg.innerHTML = '';
   if (!answerElement.value) {
     answerElement.classList.add('invalid');
-    submitResult.innerHTML = `<div id='sum10'>Bạn cần phải trả lời tối thiểu 10 câu hỏi <br> Trước khi bấm nộp bài</div>`;
+    submitResult.innerHTML = `<div id='sum10'>Bạn cần phải trả lời tối thiểu ${minRequirements} câu hỏi <br> Trước khi bấm nộp bài</div>`;
     if (i >= minRequirements) {
       submitResult.classList.remove('correctResults');
       submitResult.classList.add('correctResult');
       answerElement.classList.remove('invalid');
       submitResult.innerHTML = `Chúc mừng bạn đã vượt qua thử thách! <br> Kết quả của bạn đã được gửi tới hòm thư: nguyenthanhhoa075@gmail.com.`;
       var audioGoodBeyList = audioLists[3];
+      watch.isOn ? stopWhenOn() : watch.reset();
+      backgroundMusic.pause();
+      stop();
       audioPlay(audioGoodBeyList);
     }
+    coating.style.display = 'block';
+    coating.style.opacity = 0;
     return;
   }
   if (i < minRequirements) {
     answerElement.classList.add('invalid');
-    submitResult.innerHTML = `<div id='sum10'>Hoàn thành đủ 10 câu trả lời đúng <br> mới được nộp bài!</div>`;
+    submitResult.innerHTML = `<div id='sum10'>Hoàn thành đủ ${minRequirements} câu trả lời đúng <br> mới được nộp bài!</div>`;
   }
 });
+
+btnStar.addEventListener('click', function () {
+  answerElement.focus();
+  coating.focus();
+  coating.style.display = 'none';
+});
+
+coating.addEventListener('click', function () {
+  coating.style.opacity = 1;
+  coating.innerHTML = 'Vui lòng Click Star để bắt đầu';
+});
+
+timeSum;
 
 // Xóa massage lỗi và input value khi focus input:
 answerElement.addEventListener('focus', function handleClearError(e) {
   playBackgroundMusic();
-  submitCl.innerText = 'Nộp bài';
   formMessage.innerHTML = '';
   submitResult.innerHTML = '';
   suggestionsMsg.innerHTML = '';
@@ -407,6 +422,7 @@ function pauseBackgroundMusic() {
   isPlayIng = false;
   backgroundMusic.pause();
 }
+
 function Dong_ho() {
   var gio = document.getElementById('gio');
   var phut = document.getElementById('phut');
@@ -440,3 +456,103 @@ if (date < 10) {
   current_date = `${dates.getDate()} / ${dates.getMonth() + 1} / ${dates.getFullYear()}`;
 }
 document.querySelector('.shows_date').innerHTML = current_date;
+
+function Stopwatch(elem) {
+  var time = 0;
+  var offset;
+  var interval;
+
+  function update() {
+    if (this.isOn) {
+      time += delta();
+    }
+    elem.textContent = timeFormatter(time);
+  }
+
+  function delta() {
+    var now = Date.now();
+    var timePassed = now - offset;
+    offset = now;
+    return timePassed;
+  }
+
+  function timeFormatter(time) {
+    time = new Date(time);
+
+    var minutes = time.getMinutes().toString();
+    var seconds = time.getSeconds().toString();
+    var milliseconds = time.getMilliseconds().toString();
+    var millisecond = Math.floor(milliseconds / 10);
+
+    if (minutes.length < 2) {
+      minutes = '0' + minutes;
+    }
+    if (seconds.length < 2) {
+      seconds = '0' + seconds;
+    }
+
+    while (millisecond.length < 2) {
+      millisecond = '0' + millisecond;
+    }
+    var result = `${minutes} : ${seconds} : ${millisecond}`;
+    return result;
+  }
+
+  this.start = function () {
+    interval = setInterval(update.bind(this), 1);
+    offset = Date.now();
+    this.isOn = true;
+  };
+
+  this.stop = function () {
+    clearInterval(interval);
+    interval = null;
+    this.isOn = false;
+  };
+
+  this.reset = function () {
+    time = 0;
+    interval = null;
+    this.isOn = false;
+    update();
+  };
+  this.isOn = false;
+}
+
+function start() {
+  btnStar.textContent = 'Stop';
+  btnStar.classList.toggle('on');
+  watch.start();
+}
+
+function stop() {
+  btnStar.textContent = 'Start';
+  btnStar.classList.toggle('on');
+  watch.stop();
+}
+
+function stopWhenOn() {
+  btnStar.textContent = 'Start';
+  btnStar.classList.toggle('on');
+  watch.stop();
+  watch.reset();
+}
+
+btnSubmits.addEventListener('click', function () {
+  // watch.isOn ? stopWhenOn() : watch.reset();
+  // backgroundMusic.pause();
+  // stop();
+});
+
+btnStar.addEventListener('click', function () {
+  if (!watch.isOn) {
+    start();
+  }
+});
+
+btnPause.addEventListener('click', function () {
+  if (watch.isOn) {
+    backgroundMusic.pause();
+    stop();
+  }
+});
