@@ -15,6 +15,7 @@ var questionFrontId = appElement.querySelector('#questionFront');
 var suggestions = appElement.querySelector('#suggestions');
 var suggestionsMsg = appElement.querySelector('.suggestions');
 var suggestionsElement = appElement.querySelector('#suggestionsBack');
+var minRequirements = 4;
 
 var vocabularyEnglish = [
   ['hanging', 'They liked...out together when they were kids', 'Gợi ý', 'hanging', "<img src='./assets/img/Hai_co_tam.png' alt='Avatar' />"],
@@ -146,7 +147,6 @@ var songs = [
 
 var lengths = vocabularyEnglish.length;
 var answerValue = answerElement.value;
-var minRequirements = 20;
 var randomNumbers = [];
 var n = 0;
 var i = 0;
@@ -265,7 +265,7 @@ cardNext.addEventListener('click', function () {
     answerElement.focus();
   }
 
-  if (i === minRequirements) {
+  if (i === minRequirements + 1) {
     submitResult.classList.add('correctResults');
     submitResult.innerHTML = `Chúc mừng bạn!<br> Bạn đã vượt qua thử thách. <br> Bạn vẫn có thể tiếp tục luyện tập <br> Nếu bạn muốn nâng cao Trình độ!`;
 
@@ -275,7 +275,7 @@ cardNext.addEventListener('click', function () {
     //   marginBottom: '9px',
     // });
   }
-  if (i === 10 + minRequirements) {
+  if (i === 11 + minRequirements) {
     submitResult.classList.add('correctResults');
     submitResult.innerHTML = ` Bạn là người thật chăm chỉ đấy <br> "Có công mài sắt có ngày nên kim" <br> Chúc mừng bạn cán mốc ${minRequirements + 10} câu đúng!`;
   }
@@ -331,11 +331,12 @@ btnSubmits.addEventListener('click', function () {
       submitResult.classList.add('correctResult');
       answerElement.classList.remove('invalid');
       submitResult.innerHTML = `Chúc mừng bạn đã vượt qua thử thách! <br> Kết quả của bạn đã được gửi tới hòm thư: nguyenthanhhoa075@gmail.com.`;
-      var audioGoodBeyList = audioLists[3];
       watch.isOn ? stopWhenOn() : watch.reset();
       backgroundMusic.pause();
       stop();
+      var audioGoodBeyList = audioLists[3];
       audioPlay(audioGoodBeyList);
+      myStopFunction();
     }
     coating.style.display = 'block';
     coating.style.opacity = 0;
@@ -404,7 +405,7 @@ answerElement.oninput = function () {
 };
 
 //  Các hàm xử lý Audio:
-var audioLists = ['Am_Ohno', 'Uoc_mo_cua_Me', 'yeah', 'Tambiet', 'Nhac_nen_hay', 'Tieng_bom', 'Tiengkimgiay'];
+var audioLists = ['Am_Ohno', 'Uoc_mo_cua_Me', 'yeah', 'Tambiet', 'Nhac_nen_hay', 'Tieng_bom', 'Tiengkimgiay', 'Xin_chao'];
 var audioElement = document.querySelector('#audios');
 function audioPlay(audioList) {
   audioElement.src = `./assets/audio/${audioList}.mp3`;
@@ -446,6 +447,9 @@ function Dong_ho() {
   // audioPlay(audioClockList);
 }
 var Dem_gio = setInterval(Dong_ho, 1000);
+function myStopFunction() {
+  clearInterval(Dem_gio);
+}
 
 var dates = new Date();
 var date = dates.getDate();
@@ -461,7 +465,7 @@ function Stopwatch(elem) {
   var time = 0;
   var offset;
   var interval;
-
+  console.log({ elem });
   function update() {
     if (this.isOn) {
       time += delta();
@@ -520,7 +524,7 @@ function Stopwatch(elem) {
 }
 
 function start() {
-  btnStar.textContent = 'Stop';
+  // btnStar.textContent = 'Stop';
   btnStar.classList.toggle('on');
   watch.start();
 }
@@ -538,13 +542,15 @@ function stopWhenOn() {
   watch.reset();
 }
 
-btnSubmits.addEventListener('click', function () {
-  // watch.isOn ? stopWhenOn() : watch.reset();
-  // backgroundMusic.pause();
-  // stop();
-});
+// btnSubmits.addEventListener('click', function () {
+//   // watch.isOn ? stopWhenOn() : watch.reset();
+//   // backgroundMusic.pause();
+//   // stop();
+// });
 
 btnStar.addEventListener('click', function () {
+  var audioHelloList = audioLists[7];
+  audioPlay(audioHelloList);
   if (!watch.isOn) {
     start();
   }
