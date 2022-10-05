@@ -223,7 +223,6 @@ html {
 }
 
 .unInvalid {
-  border-color: #1dbfaf;
   background-color: #effad5;
 }
 
@@ -269,7 +268,7 @@ html {
 }
 
 .lengthArr {
-  color: red;
+  color: #415d00;
   font-size: 1.6rem;
   font-style: italic;
   font-weight: 400;
