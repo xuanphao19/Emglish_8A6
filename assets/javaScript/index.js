@@ -15,7 +15,7 @@ var questionFrontId = appElement.querySelector('#questionFront');
 var suggestions = appElement.querySelector('#suggestions');
 var suggestionsMsg = appElement.querySelector('.suggestions');
 var suggestionsElement = appElement.querySelector('#suggestionsBack');
-var minRequirements = 3;
+var minRequirements = 20;
 
 var vocabularyEnglish = [
   ['hanging', 'They liked...out together when they were kids', 'Gợi ý', 'hanging', "<img src='./assets/img/Hai_co_tam.png' alt='Avatar' />"],
@@ -311,12 +311,16 @@ suggestions.addEventListener('click', function () {
   if (answerElement.value === '') {
     answerElement.classList.add('invalid');
     suggestionsMsg.innerHTML = `<div id='sum10'>Lười học là "Bệnh cần chống như chống giặc!"</div>`;
-    audioPlay(audioSuggestionList);
+    if (card.matches('.is-flipped')) {
+      audioPlay(audioSuggestionList);
+    }
     return;
   } else {
     answerElement.classList.add('invalid');
     suggestionsMsg.innerHTML = `<div id='sum10'>Click Next để kiểm tra kết quả của bạn!</div>`;
-    audioPlay(audioSuggestionList);
+    if (card.matches('.is-flipped')) {
+      audioPlay(audioSuggestionList);
+    }
     return;
   }
 });
@@ -328,7 +332,7 @@ btnSubmits.addEventListener('click', function () {
   if (!answerElement.value) {
     answerElement.classList.add('invalid');
     if (i === 1) {
-      submitResult.innerHTML = `<div id='sum10' class="canTrai">Bạn bấm Star để bắt đâu trả lời câu hỏi<br> Nhập xong đáp án bấm tiếp tục để đi tiếp <br>Không nghĩ được đáp án bấm "Xem gợi ý" để nhận trợ giúp <br> Cảm ơn bạn đã ủng hộ chúng tôi! <br> Vui lòng không tự động sao chép, chia sẻ dưới mọi hình thức.</div>`;
+      submitResult.innerHTML = `<div id='sum10' class="canTrai">Bạn bấm Star để bắt đâu trả lời câu hỏi<br> Nhập xong đáp án bấm tiếp tục để đi tiếp <br>Không nghĩ được đáp án bấm "Xem gợi ý" để nhận trợ giúp (Chỉ những câu khó) <br> Khi click Star sẽ bắt đầu tính thời gian<br>Cảm ơn bạn đã ủng hộ chúng tôi! <br> Vui lòng không tự động sao chép, chia sẻ dưới mọi hình thức.</div>`;
     } else {
       submitResult.innerHTML = `<div id='sum10'>Bạn cần trả lời tối thiểu ${minRequirements} Câu hỏi trước khi bấm Dừng lại</div>`;
     }
@@ -352,7 +356,7 @@ btnSubmits.addEventListener('click', function () {
   }
   if (i < minRequirements) {
     answerElement.classList.add('invalid');
-    submitResult.innerHTML = `<div id='sum10'>Hoàn thành ${minRequirements} câu đúng trước khi Dừng lại<br> Đừng nản chí! Kiên trì bạn Thành Công</div>`;
+    submitResult.innerHTML = `<div id='sum10'>Hoàn thành ${minRequirements} câu đúng trước khi Dừng lại<br> Đừng nản chí! Kiên trì bạn sẽ Thành Công</div>`;
   }
 });
 
