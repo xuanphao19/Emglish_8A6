@@ -78,6 +78,17 @@ html {
   transform: rotateY(180deg);
 }
 
+/* animation: identifier 3.6s infinite linear;
+@keyframes identifier {
+  0%,
+  100% {
+    transform: rotateY(0deg);
+  }
+  50% {
+    transform: rotateY(180deg);
+  }
+} */
+
 .flip-card-front,
 .flip-card-back {
   position: absolute;
@@ -373,9 +384,12 @@ html {
   background-color: rgb(255, 255, 255);
 }
 
-.submit {
+#btnSubmits,
+#btnPause,
+#btnStar {
   border-radius: 4px;
   width: 32.7%;
+  font-size: 1.6rem;
   border: 2px solid rgb(67, 244, 152);
   background-image: linear-gradient(to top, rgb(67, 244, 152), rgb(172 252 211), rgb(67, 244, 152));
 }
@@ -395,4 +409,7 @@ html {
   50% {
     filter: hue-rotate(360deg);
   }
+}
+.canTrai {
+  text-align: left;
 }
