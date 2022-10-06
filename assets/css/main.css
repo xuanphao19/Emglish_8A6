@@ -375,14 +375,14 @@ html {
 .cccp {
   position: relative;
   width: 300px;
-  height: 32px;
+  height: 40px;
   overflow: hidden;
   margin-bottom: 10px;
 }
 .cube {
   position: relative;
   width: 300px;
-  height: 32px;
+  height: 40px;
   transform-style: preserve-3d;
   animation: cubeRotate 6s linear infinite;
 }
@@ -393,7 +393,6 @@ html {
   height: 100%;
   opacity: 0.9;
   font-size: 2.6rem;
-  /* border: 0.5px solid white; */
   border-radius: 5px;
   display: flex;
   align-items: center;
@@ -416,24 +415,45 @@ html {
 }
 
 .front {
-  transform: translateZ(16px);
+  transform: translateZ(20px);
 }
 .back {
-  transform: rotateX(180deg) translateZ(16px);
+  transform: rotateX(180deg) translateZ(20px);
 }
 .top {
-  transform: rotateX(90deg) translateZ(16px);
+  transform: rotateX(90deg) translateZ(20px);
 }
 .bottom {
-  transform: rotateX(-90deg) translateZ(16px);
+  transform: rotateX(-90deg) translateZ(20px);
 }
 @keyframes cubeRotate {
-  from {
+  0% {
     transform: rotateX(360deg);
   }
-  to {
-    transform: rotateX(0deg);
+  22.5% {
+    transform: rotateX(360deg);
   }
+  27.5% {
+    transform: rotateX(270deg);
+  }
+  47.5% {
+    transform: rotateX(270deg);
+  }
+  52.5% {
+    transform: rotateX(180deg);
+  }
+  72.5% {
+    transform: rotateX(180deg);
+  }
+  77.5% {
+    transform: rotateX(90deg);
+  }
+  97.5% {
+    transform: rotateX(90deg);
+  }
+  /* 100% {
+    transform: rotateX(0deg);
+  } */
 }
 @keyframes cubeRotates {
   from {
