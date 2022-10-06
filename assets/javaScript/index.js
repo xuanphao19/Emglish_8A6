@@ -15,7 +15,7 @@ var questionFrontId = appElement.querySelector('#questionFront');
 var suggestions = appElement.querySelector('#suggestions');
 var suggestionsMsg = appElement.querySelector('.suggestions');
 var suggestionsElement = appElement.querySelector('#suggestionsBack');
-var minRequirements = 20;
+var minRequirements = 3;
 
 var vocabularyEnglish = [
   ['hanging', 'They liked...out together when they were kids', 'Gợi ý', 'hanging', "<img src='./assets/img/Hai_co_tam.png' alt='Avatar' />"],
@@ -204,6 +204,7 @@ function getRandomQuestion() {
   return randomTerm;
 }
 
+// Xử lý Audio khi có audio question music:
 var audioQuestionElement = appElement.querySelector('.audioQuestions');
 var audioItemElement = appElement.querySelector('.audioItem');
 function speakerWaves() {
@@ -232,7 +233,7 @@ cardNext.addEventListener('click', function () {
       }
       if (answerElement.value === '') {
         answerElement.classList.add('invalid');
-        suggestionsMsg.innerHTML = `"Nhân bất học bất tri lý. <br> Ngọc bất trác, bất thành khí!" <br>*  *  *<br> "Lười nhác là kẻ thù của chính bản thân mình!" <br> "Không có Tri thức là tự làm nhục Chính mình!" `;
+        suggestionsMsg.innerHTML = `"Nhân bất học bất tri lý. <br> Ngọc bất trác, bất thành khí!" <br>*  *  *<br> "Không có Tri thức là tự làm nhục Chính mình!" `;
       }
       if (answerElement.value === randomTerm[0]) {
         formMessage.innerHTML = '';
@@ -267,6 +268,7 @@ cardNext.addEventListener('click', function () {
 
   if (i === minRequirements + 1) {
     submitResult.classList.add('correctResults');
+    btnSubmits.textContent = 'Nộp bài!';
     submitResult.innerHTML = `Chúc mừng bạn!<br> Bạn đã vượt qua thử thách. <br> Bạn vẫn có thể tiếp tục luyện tập <br> Nếu bạn muốn nâng cao Trình độ!`;
 
     /* Object.assign để hợp nhất Object tạo Css inline nhưng phức tạp */
@@ -325,26 +327,32 @@ btnSubmits.addEventListener('click', function () {
   suggestionsMsg.innerHTML = '';
   if (!answerElement.value) {
     answerElement.classList.add('invalid');
-    submitResult.innerHTML = `<div id='sum10'>Bạn cần phải trả lời tối thiểu ${minRequirements} câu hỏi <br> Trước khi bấm nộp bài</div>`;
-    if (i >= minRequirements) {
+    if (i === 1) {
+      submitResult.innerHTML = `<div id='sum10' class="canTrai">Bạn bấm Star để bắt đâu trả lời câu hỏi<br> Nhập xong đáp án bấm tiếp tục để đi tiếp <br>Không nghĩ được đáp án bấm "Xem gợi ý" để nhận trợ giúp <br> Cảm ơn bạn đã ủng hộ chúng tôi! <br> Vui lòng không tự động sao chép, chia sẻ dưới mọi hình thức.</div>`;
+    } else {
+      submitResult.innerHTML = `<div id='sum10'>Bạn cần trả lời tối thiểu ${minRequirements} Câu hỏi trước khi bấm Dừng lại</div>`;
+    }
+
+    if (i > minRequirements) {
       submitResult.classList.remove('correctResults');
       submitResult.classList.add('correctResult');
       answerElement.classList.remove('invalid');
       submitResult.innerHTML = `Chúc mừng bạn đã vượt qua thử thách! <br> Kết quả của bạn đã được gửi tới hòm thư: nguyenthanhhoa075@gmail.com.`;
+      stop();
       watch.isOn ? stopWhenOn() : watch.reset();
       backgroundMusic.pause();
-      stop();
+      btnSubmits.textContent = 'Nộp bài!';
       var audioGoodBeyList = audioLists[3];
       audioPlay(audioGoodBeyList);
       myStopFunction();
+      coating.style.display = 'block';
+      coating.style.opacity = 0;
     }
-    coating.style.display = 'block';
-    coating.style.opacity = 0;
     return;
   }
   if (i < minRequirements) {
     answerElement.classList.add('invalid');
-    submitResult.innerHTML = `<div id='sum10'>Hoàn thành đủ ${minRequirements} câu trả lời đúng <br> mới được nộp bài!</div>`;
+    submitResult.innerHTML = `<div id='sum10'>Hoàn thành ${minRequirements} câu đúng trước khi Dừng lại<br> Đừng nản chí! Kiên trì bạn Thành Công</div>`;
   }
 });
 
@@ -465,7 +473,6 @@ function Stopwatch(elem) {
   var time = 0;
   var offset;
   var interval;
-  console.log({ elem });
   function update() {
     if (this.isOn) {
       time += delta();
@@ -506,51 +513,48 @@ function Stopwatch(elem) {
     interval = setInterval(update.bind(this), 1);
     offset = Date.now();
     this.isOn = true;
+    this.isOnStarAudio = true;
   };
 
   this.stop = function () {
     clearInterval(interval);
     interval = null;
     this.isOn = false;
+    this.isOnStarAudio = true;
   };
 
   this.reset = function () {
     time = 0;
     interval = null;
     this.isOn = false;
+    this.isOnStarAudio = false;
     update();
   };
   this.isOn = false;
+  this.isOnStarAudio = false;
 }
 
 function start() {
-  // btnStar.textContent = 'Stop';
-  btnStar.classList.toggle('on');
+  btnSubmits.textContent = 'Stop';
   watch.start();
 }
 
 function stop() {
   btnStar.textContent = 'Start';
-  btnStar.classList.toggle('on');
   watch.stop();
 }
 
 function stopWhenOn() {
   btnStar.textContent = 'Start';
-  btnStar.classList.toggle('on');
   watch.stop();
   watch.reset();
 }
 
-// btnSubmits.addEventListener('click', function () {
-//   // watch.isOn ? stopWhenOn() : watch.reset();
-//   // backgroundMusic.pause();
-//   // stop();
-// });
-
 btnStar.addEventListener('click', function () {
   var audioHelloList = audioLists[7];
-  audioPlay(audioHelloList);
+  if (!watch.isOnStarAudio) {
+    audioPlay(audioHelloList);
+  }
   if (!watch.isOn) {
     start();
   }
