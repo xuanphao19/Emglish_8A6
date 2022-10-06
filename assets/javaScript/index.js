@@ -371,8 +371,6 @@ coating.addEventListener('click', function () {
   coating.innerHTML = 'Vui lòng Click Star để bắt đầu';
 });
 
-timeSum;
-
 // Xóa massage lỗi và input value khi focus input:
 answerElement.addEventListener('focus', function handleClearError(e) {
   playBackgroundMusic();
@@ -417,7 +415,7 @@ answerElement.oninput = function () {
 };
 
 //  Các hàm xử lý Audio:
-var audioLists = ['Am_Ohno', 'Uoc_mo_cua_Me', 'yeah', 'Tambiet', 'Nhac_nen_hay', 'Tieng_bom', 'Tiengkimgiay', 'Xin_chao'];
+var audioLists = ['Am_Ohno', 'Uoc_mo_cua_Me', 'yeah', 'Tambiet', 'Nhac_nen_hay', 'Tieng_bom', 'Tiengkimgiay', 'Xin_chao', 'WelcomeToWonderland'];
 var audioElement = document.querySelector('#audios');
 function audioPlay(audioList) {
   audioElement.src = `./assets/audio/${audioList}.mp3`;
@@ -564,7 +562,7 @@ function stopWhenOn() {
 }
 
 btnStar.addEventListener('click', function () {
-  var audioHelloList = audioLists[7];
+  var audioHelloList = audioLists[8];
   if (!watch.isOnStarAudio) {
     audioPlay(audioHelloList);
   }
