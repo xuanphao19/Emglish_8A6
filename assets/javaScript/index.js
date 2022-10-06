@@ -438,22 +438,30 @@ function pauseBackgroundMusic() {
 
 function Dong_ho() {
   var gio = document.getElementById('gio');
+  var gios = document.getElementById('gios');
   var phut = document.getElementById('phut');
+  var phuts = document.getElementById('phuts');
   var giay = document.getElementById('giay');
+  var giays = document.getElementById('giays');
   var Gio_hien_tai = new Date().getHours();
   var Phut_hien_tai = new Date().getMinutes();
   var Giay_hien_tai = new Date().getSeconds();
 
   gio.innerHTML = Gio_hien_tai;
+  gios.innerHTML = Gio_hien_tai;
   if (Phut_hien_tai < 10) {
     phut.innerHTML = ` : 0${Phut_hien_tai}`;
+    phuts.innerHTML = ` : 0${Phut_hien_tai}`;
   } else {
     phut.innerHTML = ` : ${Phut_hien_tai}`;
+    phuts.innerHTML = ` : ${Phut_hien_tai}`;
   }
   if (Giay_hien_tai < 10) {
     giay.innerHTML = ` : 0${Giay_hien_tai}`;
+    giays.innerHTML = ` : 0${Giay_hien_tai}`;
   } else {
     giay.innerHTML = ` : ${Giay_hien_tai}`;
+    giays.innerHTML = ` : ${Giay_hien_tai}`;
   }
   // var audioClockList = audioLists[6];
   // audioPlay(audioClockList);
@@ -472,6 +480,7 @@ if (date < 10) {
   current_date = `${dates.getDate()} / ${dates.getMonth() + 1} / ${dates.getFullYear()}`;
 }
 document.querySelector('.shows_date').innerHTML = current_date;
+document.querySelector('.shows_dates').innerHTML = current_date;
 
 function Stopwatch(elem) {
   var time = 0;
