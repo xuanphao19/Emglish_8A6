@@ -15,10 +15,10 @@ var questionFrontId = appElement.querySelector('#questionFront');
 var suggestions = appElement.querySelector('#suggestions');
 var suggestionsMsg = appElement.querySelector('.suggestions');
 var suggestionsElement = appElement.querySelector('#suggestionsBack');
-var minRequirements = 30;
+var minRequirements = 20;
 
 var vocabularyEnglish = [
-  ['hanging', 'They liked...out together when they were kids', 'Gợi ý', 'hanging', "<img src='./assets/img/Hai_co_tam.png' alt='Avatar' />"],
+  ['Hanging', 'They liked...out together when they were kids', 'Gợi ý', 'hanging', "<img src='./assets/img/Hai_co_tam.png' alt='Avatar' />"],
   ['Leisure', 'thời gian rảnh rỗi', 'Gợi ý', 'Leisure', "<img src='./assets/img/Hatrang.png' alt='Avatar' />"],
   ['Leisure activity', 'hoạt động lúc rảnh rỗi', 'Gợi ý', '... activity ', "<img src='./assets/img/MisaCute.png' alt='Avatar' />"],
   ['Hanging out', 'đi chơi với bạn bè', 'Gợi ý', 'Hanging... ', "<img src='./assets/img/ChinBacNuiRung.jpg' alt='Avatar' />"],
@@ -128,7 +128,7 @@ var vocabularyEnglish = [
   ['Harvest time', 'https://www.tienganh123.com/file/phothong/lop8-moi/unit2/lesson1/vocab/audio/4.mp3'],
   ['Go herding the buffaloes', 'https://www.tienganh123.com/file/phothong/lop8-moi/unit2/lesson1/vocab/audio/11.mp3', 'Gợi ý', 'Go herding the buffaloes'],
   ['Herd the buffaloes', 'https://www.tienganh123.com/file/phothong/lop8-moi/unit2/lesson1/vocab/audio/10.mp3', 'Gợi ý', 'Herd the buffaloes'],
-  // ['0', '1', '2', '3', '4', '5', '6'],
+  // // ['0', '1', '2', '3', '4', '5', '6'],
 ];
 var songs = [
   'Lười học thì chóng làm quan',
@@ -198,6 +198,9 @@ function getRandomQuestion() {
       questionFrontId.innerHTML = `Viết lại nội dung vừa nghe:`;
       audioQuestionElement.style.display = 'block';
       audioItemElement.src = `${itemMp3}`;
+    }
+    if (randomTerm[2] === 'Gợi ý') {
+      suggestionsElement.innerHTML = `${randomTerm[3]}`;
     }
   }
   console.log(`Gợi ý dành cho bạn: `, randomTerm[0]);
@@ -300,9 +303,9 @@ suggestions.addEventListener('click', function () {
   submitResult.classList.remove('correctResult');
   submitResult.classList.remove('correctResults');
   // Xử lý hiển thị gợi ý:
-  if (randomTerm[2] === 'Gợi ý') {
-    suggestionsElement.innerHTML = `${randomTerm[3]}`;
-  }
+  // if (randomTerm[2] === 'Gợi ý') {
+  //   suggestionsElement.innerHTML = `${randomTerm[3]}`;
+  // }
 
   // Kết hợp css Xử lý xoay ảnh:
   card.classList.toggle('is-flipped');
@@ -333,7 +336,8 @@ btnSubmits.addEventListener('click', function () {
     answerElement.classList.add('invalid');
     if (i === 1) {
       submitResult.innerHTML = `<div id='sum10' class="canTrai">Bạn bấm Star để bắt đâu trả lời câu hỏi<br> Nhập xong đáp án bấm tiếp tục để đi tiếp <br>Không nghĩ được đáp án bấm "Xem gợi ý" để nhận trợ giúp (Chỉ những câu khó) <br> Khi click Star sẽ bắt đầu tính thời gian<br>Cảm ơn bạn đã ủng hộ chúng tôi! <br> Vui lòng không tự động sao chép, chia sẻ dưới mọi hình thức.</div>`;
-    } else {
+    }
+    if (seconds > 10) {
       submitResult.innerHTML = `<div id='sum10'>Bạn cần trả lời tối thiểu ${minRequirements} Câu hỏi trước khi bấm Dừng lại</div>`;
     }
 
@@ -479,7 +483,7 @@ if (date < 10) {
 }
 document.querySelector('.shows_date').innerHTML = current_date;
 document.querySelector('.shows_dates').innerHTML = current_date;
-
+var seconds;
 function Stopwatch(elem) {
   var time = 0;
   var offset;
@@ -497,12 +501,11 @@ function Stopwatch(elem) {
     offset = now;
     return timePassed;
   }
-
   function timeFormatter(time) {
     time = new Date(time);
 
     var minutes = time.getMinutes().toString();
-    var seconds = time.getSeconds().toString();
+    seconds = time.getSeconds().toString();
     var milliseconds = time.getMilliseconds().toString();
     var millisecond = Math.floor(milliseconds / 10);
 
@@ -513,8 +516,12 @@ function Stopwatch(elem) {
       seconds = '0' + seconds;
     }
 
-    while (millisecond.length < 2) {
-      millisecond = '0' + millisecond;
+    if (millisecond < 10) {
+      millisecond = `0${millisecond}`;
+    }
+
+    if (seconds > 5) {
+      btnSubmits.textContent = 'Stop';
     }
     var result = `${minutes} : ${seconds} : ${millisecond}`;
     return result;
@@ -546,8 +553,8 @@ function Stopwatch(elem) {
 }
 
 function start() {
-  btnSubmits.textContent = 'Stop';
   watch.start();
+  // btnSubmits.textContent = 'Stop';
 }
 
 function stop() {
@@ -562,7 +569,7 @@ function stopWhenOn() {
 }
 
 btnStar.addEventListener('click', function () {
-  var audioHelloList = audioLists[8];
+  var audioHelloList = audioLists[7];
   if (!watch.isOnStarAudio) {
     audioPlay(audioHelloList);
   }
