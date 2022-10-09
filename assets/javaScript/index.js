@@ -15,7 +15,7 @@ var questionFrontId = appElement.querySelector('#questionFront');
 var suggestions = appElement.querySelector('#suggestions');
 var suggestionsMsg = appElement.querySelector('.suggestions');
 var suggestionsElement = appElement.querySelector('#suggestionsBack');
-var minRequirements = 20;
+var minRequirements = 15;
 
 var vocabularyEnglish = [
   [
@@ -288,6 +288,8 @@ var vocabularyEnglish = [
     'My mother prefers going/ to go jogging.',
   ],
   // // ['0', '1', '2', '3'],
+  // // ['0', '1', '2', '3'],
+  // // ['0', '1', '2', '3'],
   // // ['0', '1', '2', '3', '4', '5', '6'],
   // // ['0', '1', '2', '3', '4', '5', '6'],
   // // ['0', '1', '2', '3', '4', '5', '6'],
@@ -355,7 +357,7 @@ function getRandomQuestion() {
       var itemImg = item;
       flipCardFrontEle.innerHTML = `${itemImg}`;
     }
-    if (item.includes('audio')) {
+    if (item.includes('audio') || item.includes('mp3')) {
       var itemMp3 = item;
       questionFrontId.innerHTML = `Viết lại nội dung vừa nghe:`;
       audioQuestionElement.style.display = 'block';
@@ -403,7 +405,7 @@ cardNext.addEventListener('click', function () {
       if (answerElement.value === randomTerm[0]) {
         formMessage.innerHTML = '';
         submitResult.innerHTML = '';
-        var audioYeahList = audioLists[2];
+        var audioYeahList = audioLists[6];
         audioPlay(audioYeahList);
         card.classList.remove('is-flipped');
         audioQuestionElement.style.display = 'none';
