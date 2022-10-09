@@ -58,6 +58,7 @@ html {
   -webkit-backface-visibility: hidden;
   backface-visibility: hidden;
 }
+
 .flip-card-back {
   transform: rotateY(180deg);
 }
@@ -105,10 +106,6 @@ html {
   flex-direction: column;
   justify-content: space-between;
   margin-bottom: 12px;
-}
-
-.App-content {
-  margin-top: 322px;
 }
 
 .App-label,
@@ -196,6 +193,10 @@ html {
   background-color: #effad5;
 }
 
+.App-content {
+  margin-top: 322px;
+}
+
 .App-content .App-group .addInvalid {
   color: #ff0000;
   font-size: 1.9rem;
@@ -208,10 +209,12 @@ html {
   justify-content: space-between;
   align-items: center;
 }
+
 .App-group .answers .answer {
   padding: 0;
   line-height: 1.6;
 }
+
 .timeSum {
   display: flex;
   justify-content: space-between;
@@ -228,8 +231,16 @@ html {
   padding: 0 10px;
 }
 
+textarea#answer,
 #answer input {
+  word-wrap: break-word;
   word-break: break-word;
+  color: rgb(105, 101, 101);
+  font-family: 'Open Sans', sans-serif;
+  letter-spacing: normal;
+  height: 40px;
+  resize: vertical;
+  width: 300px;
 }
 
 .App-group .invalid {
@@ -336,6 +347,7 @@ html {
   margin: 4px 0 6px 0;
   width: 296px;
 }
+
 #submit .submits {
   display: flex;
   flex-wrap: nowrap;
@@ -365,13 +377,16 @@ html {
   100% {
     filter: hue-rotate(0deg);
   }
+
   50% {
     filter: hue-rotate(360deg);
   }
 }
+
 .canTrai {
   text-align: left;
 }
+
 .cccp {
   position: relative;
   width: 300px;
@@ -379,12 +394,13 @@ html {
   overflow: hidden;
   margin-bottom: 10px;
 }
+
 .cube {
   position: relative;
   width: 300px;
   height: 40px;
   transform-style: preserve-3d;
-  animation: cubeRotate 6s linear infinite;
+  animation: cubeRotate 1s linear infinite;
 }
 
 .side {
@@ -414,51 +430,73 @@ html {
   color: rgb(0, 26, 255);
 }
 
+.App-content .questionFront #sum10 {
+  padding-bottom: 6px;
+  font-size: 1.6rem;
+  font-style: italic;
+  line-height: 1.4;
+  border-radius: 5px;
+}
+
 .front {
   transform: translateZ(20px);
 }
+
 .back {
   transform: rotateX(180deg) translateZ(20px);
 }
+
 .top {
   transform: rotateX(90deg) translateZ(20px);
 }
+
 .bottom {
   transform: rotateX(-90deg) translateZ(20px);
 }
+
 @keyframes cubeRotate {
   0% {
     transform: rotateX(360deg);
   }
+
   22.5% {
     transform: rotateX(360deg);
   }
+
   27.5% {
     transform: rotateX(270deg);
   }
+
   47.5% {
     transform: rotateX(270deg);
   }
+
   52.5% {
     transform: rotateX(180deg);
   }
+
   72.5% {
     transform: rotateX(180deg);
   }
+
   77.5% {
     transform: rotateX(90deg);
   }
+
   97.5% {
     transform: rotateX(90deg);
   }
+
   /* 100% {
     transform: rotateX(0deg);
   } */
 }
+
 @keyframes cubeRotates {
   from {
     filter: hue-rotate(0deg);
   }
+
   to {
     filter: hue-rotate(360deg);
   }
