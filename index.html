@@ -3,43 +3,43 @@
   <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <title>Luyện Tập Từ Vựng Tiếng Anh lớp 8 </title>
+    <title>Luyện Tập Từ Vựng Tiếng Anh lớp 8</title>
     <link rel="icon" type="image/x-icon" href="./XuanPhao.ico" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="./assets/css/main.css" />
   </head>
-  <body onload='getRandomQuestion()'>
+  <body onload="getRandomQuestion()">
     <div class="main">
       <div class="App" id="App-1">
-        <h3 class="heading"> ❤️ <i>Love again <br /> from the beginning!</i> </h3>
+        <h3 class="heading">
+          ❤️<i> Love again<br />from the beginning! </i>
+        </h3>
         <!-- <h4 class="sub-heading">Vocabulary test</h4> -->
         <div class="flip-card-inner">
-          <div class="flip-card-front"><img src="./assets/img/GVCN8A6_2022.png" alt="Avatar" />
-          </div>
+          <div class="flip-card-front"><img src="./assets/img/MisaCute.png" alt="Avatar" /></div>
           <div class="flip-card-back">
             <img src="./assets/img/screenshot_1662025446.png" alt="Avatar" />
-            <div id="suggestionsBack"> </div>
+            <div id="suggestionsBack"></div>
           </div>
         </div>
 
         <div class="App-content">
           <div class="questionFront">
             <div class="App-group">
-              <div class='cccp'>
-
+              <div class="cccp">
                 <div class="cube">
                   <div class="side front">
-                    <div class='shows_time'>
-                      <div> <span id="gio">00</span></div>
-                      <div> <span id="phut">00</span> </div>
-                      <div> <span id="giay">00</span> </div>
+                    <div class="shows_time">
+                      <div><span id="gio">00</span></div>
+                      <div><span id="phut">00</span></div>
+                      <div><span id="giay">00</span></div>
                     </div>
                   </div>
                   <div class="side back">
-                    <div class='shows_time'>
-                      <div> <span id="gios">00</span></div>
-                      <div> <span id="phuts">00</span> </div>
-                      <div> <span id="giays">00</span> </div>
+                    <div class="shows_time">
+                      <div><span id="gios">00</span></div>
+                      <div><span id="phuts">00</span></div>
+                      <div><span id="giays">00</span></div>
                     </div>
                   </div>
                   <div class="side top">
@@ -49,35 +49,33 @@
                     <div class="shows_dates"></div>
                   </div>
                 </div>
-
               </div>
-              <div class="App-label"> Question: <span class='lengthArr'><span
-                    class="errorAnswer"></span></span></div>
-              <div class="App-control" id="questionFront"> </div>
+              <div class="App-label">
+                Question: <span class="lengthArr"><span class="errorAnswer"></span></span>
+              </div>
+              <div class="App-control" id="questionFront"></div>
               <audio class="audioItem"></audio>'
-              <div class='audioQuestions'><span><svg class='speakerWave' width='38' height='36'
-                    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="red"
-                    className="w-6 h-6">
+              <div class="audioQuestions">
+                <span
+                  ><svg class="speakerWave" width="38" height="36" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="red" className="w-6 h-6">
                     <path
                       d="M13.5 4.06c0-1.336-1.616-2.005-2.56-1.06l-4.5 4.5H4.508c-1.141 0-2.318.664-2.66 1.905A9.76 9.76 0 001.5 12c0 .898.121 1.768.35 2.595.341 1.24 1.518 1.905 2.659 1.905h1.93l4.5 4.5c.945.945 2.561.276 2.561-1.06V4.06zM18.584 5.106a.75.75 0 011.06 0c3.808 3.807 3.808 9.98 0 13.788a.75.75 0 11-1.06-1.06 8.25 8.25 0 000-11.668.75.75 0 010-1.06z" />
-                    <path
-                      d="M15.932 7.757a.75.75 0 011.061 0 6 6 0 010 8.486.75.75 0 01-1.06-1.061 4.5 4.5 0 000-6.364.75.75 0 010-1.06z" />
+                    <path d="M15.932 7.757a.75.75 0 011.061 0 6 6 0 010 8.486.75.75 0 01-1.06-1.061 4.5 4.5 0 000-6.364.75.75 0 010-1.06z" />
                   </svg>
-                </span></div>
+                </span>
+              </div>
             </div>
 
             <div class="App-group mgt-8">
-
-              <div class='answers App-label'>
+              <div class="answers App-label">
                 <div for="answer" class="answer">Answer plan:</div>
                 <div class="timeSum">
-                  <span class="minutes">00</span> :
-                  <span class="seconds">00</span> .
+                  <span class="minutes">00</span> : <span class="seconds">00</span> .
                   <span class="milliseconds">00</span>
                 </div>
               </div>
-              <input class="App-control" id="answer" name="answer"
-                placeholder="Nhập nội dung trả lời của bạn!" type="text" />
+              <textarea class="App-control" id="answer" name="answer" placeholder="Nhập nội dung trả lời của bạn!" type="text"></textarea>
+              <!-- <input class="App-control" id="answer" name="answer" placeholder="Nhập nội dung trả lời của bạn!" type="text" /> -->
               <span class="App-message"></span>
               <span class="suggestions"></span>
               <div class="coating"></div>
@@ -89,23 +87,19 @@
             </div>
             <div id="submitResult"></div>
             <button id="submit" class="btn">
-              <div class='submits'>
-                <div id='btnSubmits' class='submit'>Hướng dẫn</div>
-                <div id='btnPause' class='submit'>Pause</div>
-                <div id='btnStar' class='submit'>Star</div>
+              <div class="submits">
+                <div id="btnSubmits" class="submit">Hướng dẫn</div>
+                <div id="btnPause" class="submit">Pause</div>
+                <div id="btnStar" class="submit">Star</div>
               </div>
             </button>
           </div>
         </div>
 
-        <div><audio id='audios'></audio></div>
-        <div><audio id='backgroundMusic' src="./assets/audio/Uoc_mo_cua_Me.mp3"></audio>
-        </div>
-
+        <div><audio id="audios"></audio></div>
+        <div><audio id="backgroundMusic" src="./assets/audio/Uoc_mo_cua_Me.mp3"></audio></div>
       </div>
     </div>
-
-
 
     <script src="./assets/javaScript/index.js"></script>
     <script>
