@@ -15,50 +15,111 @@ var questionFrontId = appElement.querySelector('#questionFront');
 var suggestions = appElement.querySelector('#suggestions');
 var suggestionsMsg = appElement.querySelector('.suggestions');
 var suggestionsElement = appElement.querySelector('#suggestionsBack');
-var minRequirements = 30;
+var minRequirements = 20;
 
 var vocabularyEnglish = [
-  ['Hanging', 'They liked...out together when they were kids', 'Gợi ý', 'hanging', "<img src='./assets/img/Hai_co_tam.png' alt='Avatar' />"],
-  ['Leisure', 'thời gian rảnh rỗi', 'Gợi ý', 'Leisure', "<img src='./assets/img/Hatrang.png' alt='Avatar' />"],
+  [
+    "Let's hang out this weekend!",
+    'https://www.tienganh123.com/file/phothong/lop8-moi/unit1/lesson1/ly-thuyet/audio/4-1.mp3',
+    'Gợi ý',
+    "Let's hang out this weekend!",
+    "<img src='./assets/img/Hai_co_tam.png' alt='Avatar' />",
+  ],
+  [
+    'My favourite leisure activity is arranging flowers.',
+    'https://www.tienganh123.com/file/phothong/lop8-moi/unit1/lesson1/ly-thuyet/audio/2-1.mp3',
+    'Gợi ý',
+    'My favourite leisure activity is arranging flowers.',
+    "<img src='./assets/img/Hatrang.png' alt='Avatar' />",
+  ],
   ['Leisure activity', 'hoạt động lúc rảnh rỗi', 'Gợi ý', '... activity ', "<img src='./assets/img/MisaCute.png' alt='Avatar' />"],
-  ['Hanging out', 'đi chơi với bạn bè', 'Gợi ý', 'Hanging... ', "<img src='./assets/img/ChinBacNuiRung.jpg' alt='Avatar' />"],
-  ['Hang out', 'tụ tập, đi chơi', 'Gợi ý', ' ... out', "<img src='./assets/img/PhotDoi.jpg' alt='Avatar' />"],
-  ["Let's hang out this weekend", 'Cuối tuần này đi chơi đi!', 'Gợi ý', ' Tình anh như nước dâng cao, <br> Tình em như dải lụa đào tẩm hương.'],
+  [
+    'Girls love window shopping.',
+    'https://www.tienganh123.com/file/phothong/lop8-moi/unit1/lesson1/ly-thuyet/audio/5-1.mp3',
+    'Gợi ý',
+    'Girls love window shopping.',
+    "<img src='./assets/img/ChinBacNuiRung.jpg' alt='Avatar' />",
+  ],
+  [
+    'They go window shopping without buying or paying anything.',
+    'https://www.tienganh123.com/file/phothong/lop8-moi/unit1/lesson1/ly-thuyet/audio/6-1.mp3',
+    'Gợi ý',
+    'They go window shopping without buying or paying anything.',
+    "<img src='./assets/img/PhotDoi.jpg' alt='Avatar' />",
+  ],
+  [
+    'Do you like pet training?',
+    'https://www.tienganh123.com/file/phothong/lop8-moi/unit1/lesson1/ly-thuyet/audio/7-1.mp3',
+    'Gợi ý',
+    ' Tình anh như nước dâng cao, <br> Tình em như dải lụa đào tẩm hương.',
+  ],
   ["What is your brother's name?", 'tên em trai của bạn là gì', 'Gợi ý', " ... brother's name?", "<img src='./assets/img/Screenshot_20210503-120123_Gallery.jpg' alt='Avatar' />"],
   [
-    'Window shopping',
-    'n: Ngắm đồ bày trong các cửa hàng',
+    'Making crafts was my favourite leisure activity during summer holiday.',
+    'https://www.tienganh123.com/file/phothong/lop8-moi/unit1/lesson1/ly-thuyet/audio/9-1.mp3',
     'Gợi ý',
     'Anh đi đường ấy xa xa, <br> Để em ôm bóng trăng tà năm canh.',
     "<img src='./assets/img/Annotation 2022-10-01 180957.png' alt='Avatar' />",
   ],
   [
-    'Go window shopping',
-    'v: Đi ngắm đồ bày trong các cửa hàng',
+    'My parents gave me an amazing craft kit which has beads, buttons, stickers and wool, etc.',
+    'https://www.tienganh123.com/file/phothong/lop8-moi/unit1/lesson1/ly-thuyet/audio/10-1.mp3',
     'Gợi ý',
-    'Trí tuệ không phải là sản phẩm của việc học, mà là của nỗ lực cả đời để có được nó (Albert Einstein).',
+    'My parents gave me an amazing craft kit which has beads, buttons, stickers and wool, etc.',
     "<img src='./assets/img/Thanh_ngu.png' alt='Avatar' />",
   ],
-  ['Pet training', 'N: Huấn luyện thú cưng', 'Gợi ý', 'Học - học nữa - học mãi (Lê-Nin).'],
   [
-    'Train a pet',
-    'V: Huấn luyện thú cưng',
+    'Look! This is my hand-made bracelet.',
+    'https://www.tienganh123.com/file/phothong/lop8-moi/unit1/lesson1/ly-thuyet/audio/11-1.mp3',
+    'Gợi ý',
+    'Học - học nữa - học mãi (Lê-Nin).',
+  ],
+  [
+    "Check out this craft kit. I think you'll like it.",
+    'https://www.tienganh123.com/file/phothong/lop8-moi/unit1/lesson1/ly-thuyet/audio/12-1.mp3',
     'Gợi ý',
     'Người hỏi về điều mình chưa biết là nhà bác học, người xấu hổ không dám hỏi là kẻ thù của chính mình.',
     "<img src='./assets/img/khaigiang8A6_2022.png' alt='Avatar' />",
   ],
-  ['Making crafts', 'làm đồ thủ công', 'Gợi ý', 'Con tằm bối rối vì tơ  <br> Anh say vì rượu, em ngẩn ngơ vì tình.', "<img src='./assets/img/GVCN8A6_2022.png' alt='Avatar' />"],
   [
-    'Craft kit',
-    'bộ dụng cụ làm đồ thủ công',
+    "Wow, it's got all things I need: stickers, wool, buttons… This craft kit is right up my street!",
+    'https://www.tienganh123.com/file/phothong/lop8-moi/unit1/lesson1/ly-thuyet/audio/13-1.mp3',
+    'Gợi ý',
+    "Wow, it's got all things I need: stickers, wool, buttons… This craft kit is right up my street!",
+    "<img src='./assets/img/GVCN8A6_2022.png' alt='Avatar' />",
+  ],
+  [
+    'Playing beach games is fun.',
+    'https://www.tienganh123.com/file/phothong/lop8-moi/unit1/lesson2/ly-thuyet/audio/1-1.mp3',
     'Gợi ý',
     'Dẫu xây chín bậc phù đồ, <br> Không bằng làm phúc, cứu cho một người.',
     "<img src='./assets/img/tapthe8A6.png' alt='Avatar' />",
   ],
-  ['Bracelet', 'vòng đeo tay', 'Gợi ý', 'Nhiễu điều phủ lấy giá gương <br> Người trong một nước phải thương nhau cùng', "<img src='./assets/img/trungthu2022.png' alt='Avatar' />"],
-  ['Check out something', 'kiểm tra vật gì đó có phù hợp hay không', 'Gợi ý', 'Nghèo mà có nghĩa có nhân <br> Còn hơn sang cả mà lòng bội phu.'],
-  ["Right up someone's street", 'đúng vị/ sở thích của ai', 'Gợi ý', 'Lấy hận thù diệt hận thù <br> Hận thù không mất nghìn thu vẫn còn'],
-  ['Playing beach games', 'hoạt động chơi các môn thể thao trên bãi biển', 'Gợi ý', 'Ba năm quân tử trồng tre,<br> Mười năm uốn gậy, đánh què tiểu nhân.'],
+  [
+    'A day in the sun is a great time to play beach games.',
+    'https://www.tienganh123.com/file/phothong/lop8-moi/unit1/lesson2/ly-thuyet/audio/2-2.mp3',
+    'Gợi ý',
+    'Nhiễu điều phủ lấy giá gương <br> Người trong một nước phải thương nhau cùng',
+    "<img src='./assets/img/trungthu2022.png' alt='Avatar' />",
+  ],
+  [
+    'Doing DIY is the most creative leisure activity.',
+    'https://www.tienganh123.com/file/phothong/lop8-moi/unit1/lesson2/ly-thuyet/audio/3-4.mp3',
+    'Gợi ý',
+    'Nghèo mà có nghĩa có nhân <br> Còn hơn sang cả mà lòng bội phu.',
+  ],
+  [
+    'I feel satisfied with these DIY flower vases.',
+    'https://www.tienganh123.com/file/phothong/lop8-moi/unit1/lesson2/ly-thuyet/audio/4-2.mp3',
+    'Gợi ý',
+    'Lấy hận thù diệt hận thù <br> Hận thù không mất nghìn thu vẫn còn',
+  ],
+  [
+    'My DIY project is to make some new bookshelves this summer.',
+    'https://www.tienganh123.com/file/phothong/lop8-moi/unit1/lesson2/ly-thuyet/audio/5-1.mp3',
+    'Gợi ý',
+    'Ba năm quân tử trồng tre,<br> Mười năm uốn gậy, đánh què tiểu nhân.',
+  ],
   ['Play beach games', 'chơi các môn thể thao trên bãi biển', 'Gợi ý', 'Chim khôn kêu tiếng rảnh rang,  <br> Người khôn nói tiếng dịu dàng dễ nghe.'],
   ['Satisfied', 'hài lòng', 'Gợi ý', 'Có đỏ mà chẳng có thơm <br> Như hoa dâm bụt, nên cơm cháo gì.'],
   ['DIY project', 'N:dự án, kế hoạch tự làm (đồ gì)', 'Gợi ý', 'DIY project'],
@@ -113,7 +174,14 @@ var vocabularyEnglish = [
   ],
   ['Hospitable', 'hiếu khách', 'Gợi ý', 'Học trò học hiếu học trung <br> Học cho đến mực anh hùng mới thôi.'],
   ['Generous', 'hào phóng', 'Gợi ý', 'Nhỏ còn thơ dại biết chi <br> Lớn thì đi học, học thì phải siêng <br>Theo đòi cũng thể bút nghiêng <br> Thua em kém chị cũng nên hổ mình.'],
-  ['Optimistic', 'lạc quan', 'Gợi ý', 'Cơm cha áo mẹ chữ thầy <br> Gắng công mà học có ngày thành danh.'],
+
+  [
+    'I like hanging out with the girl next door.',
+    'https://www.tienganh123.com/file/phothong/lop8-moi/unit1/lesson1/ly-thuyet/audio/3-1.mp3',
+    'Gợi ý',
+    'Cơm cha áo mẹ chữ thầy <br> Gắng công mà học có ngày thành danh.',
+  ],
+
   ['Flying kites in the wide open countryside is great fun', 'Viết lại vd(123) Fly a kite', 'Gợi ý', 'Flying kites in the wide open countryside is great fun'],
   ["What is your father's name?", 'Tên bố của bạn là gì', 'Gợi ý', 'What is your...', "<img src='./assets/img/Dai_Nhan.png' alt='Avatar' />"],
   ["What is your mother's name?", 'Tên mẹ của bạn là gì?', 'Gợi ý', 'What is your....', "<img src='./assets/img/EmGaiHiep.jpg' alt='Avatar' />"],
@@ -128,6 +196,100 @@ var vocabularyEnglish = [
   ['Harvest time', 'https://www.tienganh123.com/file/phothong/lop8-moi/unit2/lesson1/vocab/audio/4.mp3'],
   ['Go herding the buffaloes', 'https://www.tienganh123.com/file/phothong/lop8-moi/unit2/lesson1/vocab/audio/11.mp3', 'Gợi ý', 'Go herding the buffaloes'],
   ['Herd the buffaloes', 'https://www.tienganh123.com/file/phothong/lop8-moi/unit2/lesson1/vocab/audio/10.mp3', 'Gợi ý', 'Herd the buffaloes'],
+  [
+    'Mountain biking on Sunday is really exciting.',
+    'https://www.tienganh123.com/file/phothong/lop8-moi/unit1/lesson2/ly-thuyet/audio/6-1.mp3',
+    'Gợi ý',
+    'Mountain biking on Sunday is really exciting.',
+  ],
+  [
+    'You should go mountain biking more often.',
+    'https://www.tienganh123.com/file/phothong/lop8-moi/unit1/lesson2/ly-thuyet/audio/7-1.mp3',
+    'Gợi ý',
+    'You should go mountain biking more often.',
+  ],
+  [
+    'There isn’t much socialising at the party.',
+    'https://www.tienganh123.com/file/phothong/lop8-moi/unit1/lesson2/ly-thuyet/audio/8-1.mp3',
+    'Gợi ý',
+    'There isn’t much socialising at the party.',
+  ],
+  [
+    'She socialised with many new friends at the summer camp.',
+    'https://www.tienganh123.com/file/phothong/lop8-moi/unit1/lesson2/ly-thuyet/audio/9-1.mp3',
+    'Gợi ý',
+    'She socialised with many new friends at the summer camp.',
+  ],
+  [
+    'Too much texting can be harmful to our health.',
+    'https://www.tienganh123.com/file/phothong/lop8-moi/unit1/lesson2/ly-thuyet/audio/10-1.mp3',
+    'Gợi ý',
+    'Too much texting can be harmful to our health.',
+  ],
+  [
+    'She pulled out the phone and sent him a text.',
+    'https://www.tienganh123.com/file/phothong/lop8-moi/unit1/lesson2/ly-thuyet/audio/11-2.mp3',
+    'Gợi ý',
+    'She pulled out the phone and sent him a text.',
+  ],
+  [
+    'Surfing the Internet has become his daily routine.',
+    'https://www.tienganh123.com/file/phothong/lop8-moi/unit1/lesson2/ly-thuyet/audio/12-1.mp3',
+    'Gợi ý',
+    'Surfing the Internet has become his daily routine.',
+  ],
+  [
+    'I often surf the net for learning tips.',
+    'https://www.tienganh123.com/file/phothong/lop8-moi/unit1/lesson2/ly-thuyet/audio/13-1.mp3',
+    'Gợi ý',
+    'I often surf the net for learning tips.',
+  ],
+  [
+    'He won the first prize for breaking bricks.',
+    'https://www.tienganh123.com/file/phothong/lop8-moi/unit1/lesson3/ex3/1.mp3',
+    'Gợi ý',
+    'He won the first prize for breaking bricks.',
+  ],
+  [
+    'The presentation provided brilliant ideas.',
+    'https://www.tienganh123.com/file/phothong/lop8-moi/unit1/lesson3/ex3/2.mp3',
+    'Gợi ý',
+    'The presentation provided brilliant ideas.',
+  ],
+  [
+    'Brian is preparing a brief presentation on practicing british accent.',
+    'https://www.tienganh123.com/file/phothong/lop8-moi/unit1/lesson3/ex3/3.mp3',
+    'Gợi ý',
+    'Brian is preparing a brief presentation on practicing british accent.',
+  ],
+  [
+    ' The president ap proved the program to protect ze bras.',
+    'https://www.tienganh123.com/file/phothong/lop8-moi/unit1/lesson3/ex3/4.mp3',
+    'Gợi ý',
+    ' The president ap proved the program to protect ze bras.',
+  ],
+  [
+    'The pretty princess prefers broccoli to brown bread for breakfast',
+    'https://www.tienganh123.com/file/phothong/lop8-moi/unit1/lesson3/ex3/5.mp3',
+    'Gợi ý',
+    'The pretty princess prefers broccoli to brown bread for breakfast',
+  ],
+  [
+    'I like skateboarding/ to skateboard in my free time.',
+    'https://www.tienganh123.com/file/phothong/lop8-moi/unit1/lesson4/ly-thuyet/1-1.mp3',
+    'Gợi ý',
+    'I like skateboarding/ to skateboard in my free time.',
+  ],
+  ['She loves training/ to train her dog.', 'https://www.tienganh123.com/file/phothong/lop8-moi/unit1/lesson4/ly-thuyet/2-1.mp3', 'Gợi ý', 'She loves training/ to train her dog.'],
+  [
+    'My mother prefers going/ to go jogging.',
+    'https://www.tienganh123.com/file/phothong/lop8-moi/unit1/lesson4/ly-thuyet/4-1.mp3',
+    'Gợi ý',
+    'My mother prefers going/ to go jogging.',
+  ],
+  // // ['0', '1', '2', '3'],
+  // // ['0', '1', '2', '3', '4', '5', '6'],
+  // // ['0', '1', '2', '3', '4', '5', '6'],
   // // ['0', '1', '2', '3', '4', '5', '6'],
 ];
 var songs = [
@@ -337,7 +499,7 @@ btnSubmits.addEventListener('click', function () {
     if (i === 1) {
       submitResult.innerHTML = `<div id='sum10' class="canTrai">Bạn bấm Star để bắt đâu trả lời câu hỏi<br> Nhập xong đáp án bấm tiếp tục để đi tiếp <br>Không nghĩ được đáp án bấm "Xem gợi ý" để nhận trợ giúp (Chỉ những câu khó) <br> Khi click Star sẽ bắt đầu tính thời gian<br>Cảm ơn bạn đã ủng hộ chúng tôi! <br> Vui lòng không tự động sao chép, chia sẻ dưới mọi hình thức.</div>`;
     }
-    if (seconds > 10) {
+    if (seconds > 5) {
       submitResult.innerHTML = `<div id='sum10'>Bạn cần trả lời tối thiểu ${minRequirements} Câu hỏi trước khi bấm Dừng lại</div>`;
     }
 
